@@ -54,14 +54,13 @@ local keys = {
    { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\x15' },
 
    -- copy/paste --
-   { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') },
-   { key = 'v',          mods = 'CTRL|SHIFT',  action = act.PasteFrom('Clipboard') },
+   { key = 'c',          mods = mod.SUPER,  action = act.CopyTo('Clipboard') },
+   { key = 'v',          mods = mod.SUPER,  action = act.PasteFrom('Clipboard') },
 
    -- tabs --
    -- tabs: spawn+close
    { key = 't',          mods = mod.SUPER,     action = act.SpawnTab('DefaultDomain') },
-   { key = 't',          mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = 'WSL:Ubuntu' }) },
-   { key = 'w',          mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = false }) },
+   { key = 'w',          mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = true }) },
 
    -- tabs: navigation
    { key = '[',          mods = mod.SUPER,     action = act.ActivateTabRelative(-1) },
@@ -73,13 +72,20 @@ local keys = {
    { key = '0',          mods = mod.SUPER,     action = act.EmitEvent('tabs.manual-update-tab-title') },
    { key = '0',          mods = mod.SUPER_REV, action = act.EmitEvent('tabs.reset-tab-title') },
 
-   -- tab: hide tab-bar
-   { key = '9',          mods = mod.SUPER,     action = act.EmitEvent('tabs.toggle-tab-bar'), },
+   -- tab: go to tab number
+   { key = '9',          mods = mod.SUPER,     action = act.ActivateTab(8) },
+   { key = '8',          mods = mod.SUPER,     action = act.ActivateTab(7) },
+   { key = '7',          mods = mod.SUPER,     action = act.ActivateTab(6) },
+   { key = '6',          mods = mod.SUPER,     action = act.ActivateTab(5) },
+   { key = '5',          mods = mod.SUPER,     action = act.ActivateTab(4) },
+   { key = '4',          mods = mod.SUPER,     action = act.ActivateTab(3) },
+   { key = '3',          mods = mod.SUPER,     action = act.ActivateTab(2) },
+   { key = '2',          mods = mod.SUPER,     action = act.ActivateTab(1) },
+   { key = '1',          mods = mod.SUPER,     action = act.ActivateTab(0) },
 
    -- window --
    -- spawn windows
    { key = 'n',          mods = mod.SUPER,     action = act.SpawnWindow },
-
    -- background controls --
    {
       key = [[/]],
@@ -130,12 +136,12 @@ local keys = {
    -- panes --
    -- panes: split panes
    {
-      key = [[\]],
-      mods = mod.SUPER,
+      key = 's',
+      mods = mod.SUPER_REV,
       action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
    },
    {
-      key = [[\]],
+      key = 'v',
       mods = mod.SUPER_REV,
       action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
    },
@@ -149,27 +155,20 @@ local keys = {
    { key = 'j',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Down') },
    { key = 'h',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Left') },
    { key = 'l',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Right') },
-   {
-      key = 'p',
-      mods = mod.SUPER_REV,
-      action = act.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' }),
-   },
 
    -- key-tables --
    -- resizes fonts
    {
       key = 'f',
-      mods = 'LEADER',
+      mods = mod.SUPER_REV,
       action = act.ActivateKeyTable({
          name = 'resize_font',
-         one_shot = false,
-         timemout_miliseconds = 1000,
       }),
    },
    -- resize panes
    {
-      key = 'p',
-      mods = 'LEADER',
+      key = 'r',
+      mods = mod.SUPER_REV,
       action = act.ActivateKeyTable({
          name = 'resize_pane',
          one_shot = false,

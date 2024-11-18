@@ -24,7 +24,7 @@ return {
          width = '120%',
          vertical_offset = '-10%',
          horizontal_offset = '-10%',
-         opacity = 0.96,
+         opacity = 0.9,
       },
    },
 
